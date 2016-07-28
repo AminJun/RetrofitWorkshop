@@ -1,11 +1,14 @@
 package com.missdr.jun.test1;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,11 +50,18 @@ public class PostAdapter extends BaseAdapter {
         TextView description = (TextView) convertView.findViewById(R.id.description);
         TextView likes = (TextView) convertView.findViewById(R.id.mylikes);
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
+        ImageView blogImage = (ImageView) convertView.findViewById(R.id.blogimage);
 
         author.setText(p.getAuthor());
         description.setText(p.getDescription());
         likes.setText(String.valueOf(p.getLikes()));
         icon.setImageResource(R.drawable.heart);
+        Picasso.with(activity).load(p.getImage())
+                .placeholder(R.drawable.ic_downloding)
+                .error(R.drawable.ic_fail_24dp)
+                .into(blogImage);
+
+
 
 
         return convertView;
